@@ -1,0 +1,862 @@
+/* Fuente general del sitio */
+@font-face {
+    font-family: 'Nunito';
+    src: url('../fonts/Nunito-VariableFont_wght.woff2') format('woff2'),
+         url('../fonts/Nunito-VariableFont_wght.ttf') format('truetype');
+    font-weight: 200 900;
+    font-style: normal;
+    font-display: swap;
+}
+/* Selector universal */
+* {
+    font-family: 'Nunito', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    font-weight: inherit;
+    line-height: inherit;
+    color: inherit;
+}
+/* HTML del sitio */
+html, body {
+    overflow-x: hidden;
+    overscroll-behavior: none; 
+}
+/* Cuerpo del sitio */
+body {
+    font-weight: 400;
+    background: linear-gradient(to bottom, #ffffff, #3597ff); /* blanco arriba, azul pastel abajo */
+    margin: 0;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    min-height: 100vh; /* cubrir toda la pantalla */
+    background-attachment: fixed; /* para que el fondo no se mueva */  
+}
+/* Cuerpo usando pantalla completa */
+body.full-interface {
+    display: block;
+    padding: 0;
+    margin: 0;
+    min-height: auto;
+    box-sizing: border-box;
+}
+/* Contenedor delgado */
+.login-container {
+    width: 100%;
+    max-width: 700px;
+    padding: 20px;
+    margin: 0 auto; 
+}
+/* Body alternativo */
+body.alternate {
+    display: flex;
+    justify-content: center;      
+    align-items: center;          
+    min-height: 100vh;            
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(to bottom, #ffffff, #0056b3);
+    box-sizing: border-box;
+}
+/* contenedor del body alternativo */
+body.alternate > .login-container {
+    margin: auto;
+}
+/* Contenedor de borde azul */
+.login-box {
+    border: 2px solid #00aaff;
+    border-radius: 20px;
+    background-color: #ffffff;
+    padding: 30px;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+/* Estios del H1 para el login-box */
+.login-box h1 {
+    color: #007bff;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+/* Estilos del H4 para el login-box */
+.login-box h4 {
+    font-weight: 600;
+    color: #333;
+}
+/* Cuadro de información */
+.info-box {
+    background-color: #cceeff;
+    border-radius: 10px;
+    padding: 15px;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+/* Campos de los íconos del formulario */
+.login-fields .input-container {
+    position: relative;
+}
+/* Inputs */
+.form-control {
+    border-radius: 10px;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    width: 100%;
+    box-sizing: border-box;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 400;
+    resize: vertical;
+    overflow-y: auto;
+}
+textarea.form-control {
+    min-height: 50px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+/* Textos en negrita */
+.form-label {
+    font-weight: 600;
+    color: #333;
+}
+/* Botón azul principal */
+.btn-primary {
+    border-radius: 10px;
+    font-weight: 700;
+    padding: 12px 24px;
+    background-color: #007bff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Nunito', sans-serif;
+    text-transform: uppercase;
+}
+/* Botón azul secundario */
+.btn-info {
+    border-radius: 10px;
+    font-weight: 700;
+    padding: 12px;
+    background-color: #006eff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Nunito', sans-serif;
+}
+/* Comportamiento de botón azul secundario */
+.btn-info:hover {
+    background-color: #006eff;
+    color: white;
+}
+/* Distribución de los botones en fila */
+.btn-group-custom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin: 15px 0;
+}
+/* Botón gris oscuro */
+.btn-secondary {
+    border-radius: 10px;
+    font-weight: 700;
+    padding: 12px;
+    background-color: #6c757d;
+    
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Nunito', sans-serif;
+}
+/* Botón verde */
+.btn-success {
+    border-radius: 10px;
+    font-weight: 700;
+    padding: 12px;
+    background-color: #0baa00;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Nunito', sans-serif;
+}
+/* Botón rojo */
+.btn-danger {
+    border-radius: 10px;
+    font-weight: 700;
+    padding: 12px;
+    background-color: #dc3545;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Nunito', sans-serif;
+}
+/* Botón gris */
+.btn-gray {
+    border-radius: 10px;
+    font-weight: 700;
+    padding: 12px;
+    background-color: gray;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Nunito', sans-serif;
+}
+/* Comportamiento del botón gris */
+.btn-gray:hover {
+    background-color: rgb(101, 101, 101);
+    color: white;
+}
+/* Botón blanco con borde azul */
+.btn-outline-primary {
+    border-radius: 10px;
+    font-weight: 700;
+    padding: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Nunito', sans-serif;
+}
+/* Cabecera morada con texto blanco para el Registro de empleados*/
+.usuarios-section {
+    background-color: #6f42c1 !important;
+    color: white;
+    border-radius: 10px 10px 0 0;
+    padding: 10px 15px;
+    font-weight: bold;
+    margin-top: 20px;
+}
+/* Contenedor con borde y fondo blanco */
+.usuarios-list {
+    border: 2px solid #dee2e6;
+    border-top: none;
+    border-radius: 0 0 10px 10px;
+    background-color: white;
+}
+/* Elemento con divisor */
+.usuario-item {
+    padding: 10px 15px;
+    border-bottom: 1px solid #dee2e6;
+}
+/* Modificación del elemento divisor */
+.usuario-item:last-child {
+    border-bottom: none;
+}
+/* Fuente en negritas del label */
+.form-label {
+    font-weight: bold;
+}
+/* Botón ocupando el ancho del contenendor */
+.btn-block {
+    width: 100%;
+    margin-top: 20px;
+    padding: 12px;
+    font-size: 1.1rem;
+}
+/* Contenedor con borde punteado */
+.ticket-box {
+    max-width: 100%;
+    width: auto;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 45px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 2px dashed #3881ff;
+    border-radius: 20px;
+}
+/* Título en cabecera */
+.ticket-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+}
+/* Secciones principales */
+.ticket-section {
+    background-color: #f8f9fa;
+    border-radius: 15px;
+    padding: 20px;
+    margin-top: 4px;
+}
+/* Cabecera de tablas morada */
+.ticket-header {
+    background-color: #9c27b0;
+    color: white;
+    padding: 15px;
+    border-radius: 15px 15px 0 0;
+    font-weight: bold;
+}
+/* Contenido de tablas */
+.ticket-footer {
+    background-color: #e9ecef;
+    padding: 15px;
+    text-align: right;
+    font-size: 1.25rem;
+    font-weight: bold;
+    border-radius: 0 0 15px 15px;
+}
+/* Estilo para el grupo de input de contraseña */
+.input-group {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    width: 100%;
+}
+/* Botón Ver contraseña en la interfaz de Información de cuenta */
+#toggleMainPassword {
+    border: 1px solid #ced4da;
+    border-left: none;
+    background-color: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 12px;
+    transition: all 0.2s ease;
+}
+/* Comportamiento del botón Ver contraseña  */
+#toggleMainPassword:hover {
+    background-color: #e9ecef;
+}
+/* Comportamiento de selección del botón Ver contraseña */
+#toggleMainPassword:focus {
+    outline: none;
+    box-shadow: none;
+    border-color: #ced4da;
+    border-left: none;
+}
+/* Color gris al seleccionar el boton de Ver contraseña */
+#toggleMainPassword i {
+    color: #6c757d;
+    font-size: 1rem;
+}
+/* Espacio del botón Ver contraseña */
+.input-group .form-control:not(:first-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+/* Alineación del texto Cambiar */
+.d-flex.align-items-center {
+    gap: 8px;
+}
+/* Estilo del texto Cambiar */
+.d-flex.align-items-center a.text-primary.fw-semibold.small {
+    color: #6c757d !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease; 
+}
+/* Comportamiento del texto Cambiar */
+.d-flex.align-items-center a.text-primary.fw-semibold.small:hover {
+    color: #495057 !important; 
+    text-decoration: none !important; 
+}
+/* NavBar */
+.navbar-custom {
+    background-color: #007bff;
+    color: white;
+    padding: 5px 0px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1030;
+}
+/* Espacio del logo del NavBar */
+.navbar-custom .logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0 15px;
+}
+/* Estilo de la imagen del logo del NavBar */
+.navbar-custom .logo img {
+    width: 46px;
+    height: 40px;
+}
+/* Dropdown */
+.dropdown {
+    display: flex;
+    height: 100%;
+}
+/* Botón que despliega el Dropdown */
+.dropdown-toggle.navbar-user-btn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    height: 100%; 
+    border-radius: 0; 
+    margin: 0; 
+    position: relative;
+    gap: 8px;
+    padding-right: 30px; 
+}
+/* Comportamiento del botón que despliega el Dropdown */
+.dropdown-toggle.navbar-user-btn::after {
+    margin-left: 10px;
+}
+/* Estilos del Dropdown desplegado */
+.dropdown-menu {
+    background-color: #007bff;
+    border: none;
+    border-radius: 0 0 12px 12px;
+    margin-top: 0;
+}
+/* Estilos de los elementos del Dropdown */
+.dropdown-item {
+    color: white !important;
+    padding: 8px 20px;
+    cursor: pointer;
+}
+/* Comportamiento de los elementos del Dropdown */
+.dropdown-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+/* Línea deivisora del Dropdown */
+.dropdown-divider {
+    border-color: rgba(255, 255, 255, 0.1);
+    margin: 5px 0;
+}
+/* Estilos del elemento Rol del Dropdown */
+#rol {
+    pointer-events: none;
+    cursor: default;
+    user-select: none; 
+}
+/* Estilo del modal en general */
+.modal {
+    overscroll-behavior: contain;
+}
+/* Estilo de espacios del modal */
+.custom-modal-dialog {
+    max-width: 600px;
+    width: 100%;
+    margin: auto;
+    padding: 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 30px);
+}
+/* Estilo visual del modal (similar a login-box) */
+.modal-content.custom-modal-style {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 25px;
+    border: 2px solid #007bff;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+    font-family: 'Nunito', sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+}
+/* Encabezado del modal */
+.custom-modal-style .modal-header {
+    border-bottom: 1px solid #dee2e6;
+    padding-bottom: 15px;
+}
+/* Título del modal */
+.custom-modal-style .modal-title {
+    font-weight: 700;
+    font-size: 1.25rem;
+}
+/* Cuerpo del modal */
+.custom-modal-style .modal-body {
+    padding-top: 20px;
+}
+/* Títulos del modal */
+.custom-modal-style h6.section-title {
+    font-weight: 700;
+    margin-bottom: 15px;
+    color: #343a40;
+}
+/* Descripciones del modal */
+.custom-modal-style .column-title {
+    font-weight: 600;
+    color: #495057;
+}
+/* Columna de descripciones del modal */
+.custom-modal-style .column-description {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+/* Comportamientos de las columnas del modal */
+.custom-modal-style ul.list-custom li::before {
+    color: #0d6efd;
+}
+/* Estilos para la lista de Historial de revisiones */
+.historial-box {
+    border: 2px dashed #ccc;
+    border-radius: 15px;
+    overflow: hidden;
+    max-width: 100%;
+}
+/* Cabecera del Historial de revisiones */
+.historial-header {
+    background-color: #9c27b0;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+}
+/* Contenedor del Historial de revisiones */
+.historial-body {
+    background-color: #ffffff;
+    padding: 0;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+/* Elementos del Historial de revisiones */
+.historial-item {
+    padding: 8px 12px;
+    border-bottom: 1px solid #ddd;
+}
+/* Elementos del Historial de revisiones sin borde */
+.historial-item:last-child {
+    border-bottom: none;
+}
+/* Ccntenedor de cuenta de usuario */
+.account-box {
+    max-width: 720px;
+    margin: auto;
+    border: 2px dashed #ccc;
+    border-radius: 20px;
+    background-color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+}
+/* Cabecera con botón de Regresar */
+.header-back-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+/* Flecha anclada a la izquierda del botón de Regresar */
+.header-back-container a.back-arrow {
+    position: absolute;
+    left: 0;
+    color: #0d6efd;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+/* Titulo centrado horizontalmente en botón de Regresar */
+.header-back-container h4 {
+    margin: 0 auto;
+    font-weight: 700;
+    color: #000000;
+}
+/* Estilos del card-header */
+.card-header-custom {
+    background-color: #91268F;
+    color: white;
+    font-weight: bold;
+}
+/* Estilo del botón de Resolver */
+.btn-resolver {
+    background-color: #28a745;
+    color: white;
+}
+/* Contenedor de alerta pendiente */
+.alerta-pendiente {
+    border-left: 5px solid red;
+}
+/* Contenedor de alerta resuelta */
+.alerta-ok {
+    border-left: 5px solid green;
+}
+/* Botón de alerta pendiente */
+.btn-pendiente {
+    background-color: red;
+    color: white;
+    font-size: 0.75rem;
+}
+/* Botón Ver detalles */
+.btn-ver {
+    background-color: #007bff;
+    color: white;
+}
+/* Contenido de las alertas */
+.card-body span {
+    font-weight: bold;
+}
+/* Estilos redondeado */
+.rounded-top-custom {
+    border-radius: 1rem 1rem 0 0;
+}
+/* Tamaño para el DatePicker */
+.donut-chart {
+    width: 100%;
+    max-width: 300px;
+    margin: auto;
+}
+/* Estilos para el DatePicker */
+.datepicker-input {
+  padding-right: 2.5rem;
+  background-color: white;
+  cursor: pointer;
+}
+/* Ícono del DatePicker */
+.datepicker-icon {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #6c757d;
+  pointer-events: none;
+}
+/* Sobrescribir estilos del jQuery UI Datepicker */
+.ui-datepicker {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  padding: 0.5rem;
+}
+/* Estilos para la cabecera del DatePicker */
+.ui-datepicker-header {
+  background: #f8f9fa;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+}
+/* Estilos para el título del DatePicker */
+.ui-datepicker-title {
+  font-weight: 500;
+}
+/* Estilos para el cursor en DatePicker */
+.ui-datepicker-prev, .ui-datepicker-next {
+  cursor: pointer;
+  top: 0.5rem;
+}
+/* Estilos sobre el DatePicker */
+.ui-datepicker-prev:hover, .ui-datepicker-next:hover {
+  background: none;
+  border: none;
+}
+/* Estilos para la fuente de los elementos th de DatePicker */
+.ui-datepicker-calendar th {
+  font-weight: 500;
+  color: #495057;
+}
+/* Estilos para la fuente de los elementos td de DatePicker */
+.ui-datepicker-calendar td {
+  padding: 0.1rem;
+}
+/* Estilos para el color de los elementos td de DatePicker */
+.ui-datepicker-calendar td a {
+  border: none;
+  text-align: center;
+  padding: 0.25rem;
+  color: #212529;
+  border-radius: 0.25rem;
+}
+/* Comprtamiento para los elementos td de DatePicker */
+.ui-datepicker-calendar td a:hover {
+  background: #e9ecef;
+  color: #212529;
+}
+/* Coportamiento de DatePicker */
+.ui-datepicker-calendar .ui-state-active {
+  background: #0d6efd;
+  color: white;
+}
+/* Campos de los elementos de DatePicker */
+.ui-datepicker-current {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  margin-right: 0.5rem;
+}
+/* Estilos para el color del elemento close de DatePicker */
+.ui-datepicker-close {
+  background: #0d6efd;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+}
+/* Estilos base responsivos de gráficas */
+.chart-container {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    aspect-ratio: 1/1;
+    margin: 15px auto;
+    padding: 10px;
+}
+/* Estilos base responsivos para las barras */
+.chart-container-bar {
+    width: 100%;
+    max-width: 1000px;
+    height: auto;
+    aspect-ratio: 1.5/1;
+    margin: 15px auto;
+    padding: 10px;
+}
+/*Textos p de requisitos de contraseña */
+#requisitosContrasena p {
+    line-height: 1.2;
+    display: flex;          
+    align-items: center;
+    gap: 5px;
+    margin: 0 0 4px 0;
+}
+/*Textos i de requisitos de contraseña */
+#requisitosContrasena i {
+    font-size: 1rem;
+    line-height: 1;
+}
+/* ---- Móviles muy pequeños ---- */
+@media (max-width: 480px) {
+    .navbar-custom {
+        position: relative; 
+        z-index: 1000; 
+    }
+    .login-container {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 5px;
+    }
+    .login-box {
+        padding: 20px;
+        border-radius: 10px;
+    }
+    .login-box h1 {
+        font-size: 1.5rem;
+    }
+    h4 {
+        font-size: 1.1rem;
+    }
+    .info-box {
+        font-size: 0.85rem;
+    }
+    .dropdown-menu {
+        top: 10px !important;
+    }
+    .ticket-box {
+        width: 97%;
+        max-width: none; 
+        margin-left: auto; 
+        margin-right: auto;
+        margin-top: -3%;
+        margin-bottom: auto;
+        padding: 15px; 
+    }
+    .chart-container {
+        aspect-ratio: 1/1.3;
+        margin: 10px auto;
+    }
+    .chart-container-bar {
+        aspect-ratio: 1/1.8;
+        padding: 5px;
+    }
+    @media (orientation: portrait) {
+        .chart-container-bar {
+            max-height: 80vh;
+        }
+    }
+}
+/* ---- Móviles pequeños (≤576px) ---- */
+@media (max-width: 576px) {
+    .custom-modal-dialog {
+        padding: 15px;
+        margin: 0;
+        min-height: 100vh;
+    }
+    .modal-content.custom-modal-style {
+        padding: 20px 15px;
+        border-radius: 15px;
+    }
+    .custom-modal-style .column-container {
+        flex-direction: column;
+    }
+    .custom-modal-style .column {
+        padding: 10px 0;
+    }
+}
+/* ---- Pantallas medianas (≤768px) ---- */
+@media (max-width: 768px) {
+    .login-container {
+        width: 100%;
+        max-width: 600px;
+        padding: 20px;
+    }
+    .login-box {
+        padding: 25px;
+    }
+    .login-box h1 {
+        font-size: 1.8rem;
+    }
+    .info-box {
+        font-size: 0.9rem;
+        padding: 12px;
+    }
+    .form-control {
+        padding: 10px 12px;
+    }
+    .btn-primary {
+        padding: 10px;
+    }
+    .flex-column .position-relative {
+        width: 100% !important;
+    }
+    .flex-column #BtnUpdate {
+        width: 100%;
+        margin-top: 0.5rem;
+    }
+    .chart-container {
+        max-width: 95vw;
+        aspect-ratio: 1/1.2;
+    }
+    .chart-container-bar {
+        max-width: 95vw;
+        aspect-ratio: 1/1.5;
+        overflow-x: auto;
+    }
+}
+.sucursal-info {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background-color: #e7f3ff;
+    padding: 8px 15px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    color: #007bff;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    z-index: 1000;
+}
+.login-box {
+    position: relative; /* Necesario para posicionar elementos absolutos dentro */
+}
+/* ---- Pantallas medianas o mayores (≥768px) ---- */
+@media (min-width: 768px) {
+    .flex-md-row .position-relative {
+        min-width: 200px;
+        max-width: 300px;
+    }
+    .flex-md-row #BtnUpdate {
+        min-width: 150px;
+    }
+}
+/* ---- Pantallas grandes (≥992px) ---- */
+@media (min-width: 992px) {
+    body.full-interface {
+        display: block;
+        padding: 0;
+        margin: 0;
+        min-height: auto;
+        width: 100vw;
+    }
+    #requisitosContrasena p {
+    transition: color 0.2s ease-in-out;
+    }
+    #requisitosContrasena p.valid {
+        color: green;
+    }
+    #requisitosContrasena p.invalid {
+        color: red;
+    }
+}
