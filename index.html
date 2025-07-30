@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Verificador de Tickets</title>
+  <!-- Bootstrap y FontAwesome -->
+  <link href="bootstrap-5.1.3/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="fontawesome-6.7.2/css/all.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style/styles.css" />
+  <link rel="stylesheet" href="style/sweetalert2.min.css">
+</head>
+<body class="full-interface">
+  <!-- Navbar -->
+  <nav class="navbar-custom">
+    <div class="logo">
+      <a href="index.html" class="text-decoration-none d-flex align-items-center">
+          <img src="imagenes/logo dacwhite.png" alt="Logo" />
+          <span class="fs-4 fw-bold text-white ms-2">Verificador de Tickets</span>
+      </a>
+    </div>
+    <div class="sucursal-info-navbar text-white fw-bold">
+  Conectado a: <span id="sucursalActual">Sucursal XYZ</span>
+</div>
+    <div class="dropdown">
+      <button class="dropdown-toggle navbar-user-btn fw-bold text-white" type="button" id="dropdownUser" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fas fa-user-circle"></i> User
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownUser">
+        <li>
+            <a class="dropdown-item text-secondary d-flex align-items-center gap-2" id="rol">
+                <i class="fas fa-user-circle"></i> Rol de usuario
+            </a>
+        </li>
+        <div class="divider" style="border-top: 0.1px solid #dee2e6; margin: 10px 0;"></div>
+        <li><a class="dropdown-item" id="configuracion">Configuración</a></li>
+        <li>
+          <a class="dropdown-item" id="historial" data-bs-toggle="modal" data-bs-target="#modalHistorialRevisiones">
+            Historial de revisiones
+          </a>
+        </li>
+        <li><a class="dropdown-item" id="paneladmin">Panel de administración</a></li>
+        <li>
+          <a class="dropdown-item" id="registroempleado" data-bs-toggle="modal" data-bs-target="#modalRegistroEmpleado">
+            Registro de empleados
+          </a>
+        </li>
+        <li><a class="dropdown-item" id="cuenta">Cuenta</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item text-danger" id="cerrarses">Cerrar sesión</a></li>
+      </ul>
+    </div>
+  </nav><br>
+  <!-- Contenedor principal -->
+  <div class="ticket-box">
+    <video id="qr-reader" style="width: 100%; max-width: 400px; margin: auto; display: none;"></video>
+    <!-- Escaneo -->
+    <div class="ticket-section text-center">
+      <h4 class="ticket-title mb-2"><i class="fas fa-barcode"></i> Escanear Ticket</h4>
+      <p>Usa el escáner o ingresa manualmente el folio de ticket</p>
+      <div class="input-group my-3">
+        <div class="form-control" contenteditable="true" id="ticketFolio" style="min-height: 38px;"></div>
+        <button class="btn btn-outline-secondary" id="btnScan">
+          <i class="fas fa-camera"></i>
+        </button>
+      </div>
+
+      <div class="d-flex justify-content-center gap-3">
+        <button class="btn btn-success fw-bold px-4" id="procesarTic">Procesar Ticket</button>
+        <button class="btn btn-danger fw-bold px-4">Cancelar</button>
+      </div>
+    </div>
+    <!-- Detalles del ticket -->
+    <div class="ticket-section p-0">
+      <div class="ticket-header d-flex justify-content-between align-items-center">
+        <span>Detalles del ticket</span>
+        <span>Estado</span>
+      </div>
+      <div class="p-3">
+        <div class="row text-center mb-3">
+          <div class="col-md-4">
+            <strong>FOLIO</strong><br>00000000000000
+          </div>
+          <div class="col-md-4">
+            <strong>FECHA/HORA</strong><br>dd-mm-aaaa &nbsp; hh:mm X.M.
+          </div>
+          <div class="col-md-4">
+            <strong>CAJA</strong><br>Caja #
+          </div>
+        </div>
+        <table class="table table-bordered text-center">
+          <thead class="table-light">
+            <tr>
+                <th class="fw-bold">Producto</th>
+                <th class="fw-bold">Cantidad</th>
+                <th class="fw-bold">Precio unit.</th>
+                <th class="fw-bold">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Producto</td>
+              <td>Cantidad</td>
+              <td>Precio</td>
+              <td>Total</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="ticket-footer">Total pagado: Totalfinal</div>
+    </div>
+    <div class="divider" style="border-top: 1px solid #dee2e6; margin: 15px 0;"></div>
+    <!-- Acciones -->
+    <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
+      <button class="btn btn-info px-4">Ver Ticket en PDF</button>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
+      <button class="btn btn-gray px-4" id="procesarFir">Firma Digital</button>
+    </div>
+    <div class="d-flex flex-wrap justify-content-center gap-3 mt-3">
+      <button class="btn btn-success px-4" id="btnRev">Confirmar Revisión</button>
+      <button class="btn btn-danger px-4" data-bs-toggle="modal" data-bs-target="#modalReportarAnomalia">
+        Reportar Anomalía
+      </button>
+    </div>
+  </div><br>
+<!-- Modal Registro de Empleados -->
+<div class="modal fade" id="modalRegistroEmpleado" tabindex="-1" aria-labelledby="modalRegistroEmpleadoLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg modal-dialog-centered custom-modal-dialog">
+    <div class="modal-content custom-modal-style">
+      <div class="modal-header">
+        <h5 class="fw-bold w-100 text-center text-primary" id="modalRegistroEmpleadoLabel">
+          <i class="fas fa-users"></i> Registro de empleados
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 text-start">
+          <label class="form-label fw-bold">Correo:</label>
+          <div class="form-control" contenteditable="true" id="EmplEmail"></div>
+        </div>
+        <div class="mb-3 text-start">
+          <label class="form-label fw-bold">Usuario:</label>
+          <div class="form-control" contenteditable="true" id="EmplUser"></div>
+        </div>
+        <div class="mb-3 text-start">
+          <label class="form-label fw-bold">Contraseña:</label>
+          <div class="form-control" contenteditable="true" id="EmplPass"></div>
+        </div>
+        <div class="btn-group-custom d-flex gap-2 flex-wrap mb-3">
+          <button type="button" id="add-empl" class="btn btn-success flex-fill">Agregar usuario</button>
+          <button type="button" id="edit-empl" class="btn btn-info flex-fill">Editar usuario</button>
+          <button type="button" id="delete-empl" class="btn btn-danger flex-fill">Eliminar usuario</button>
+        </div>
+        <h6 class="usuarios-section text-center">Usuarios</h6>
+        <div class="usuarios-list">
+          <div class="usuario-item">User1</div>
+          <div class="usuario-item">User2</div>
+          <div class="usuario-item">User3</div>
+          <div class="usuario-item">User...</div>
+        </div>
+        <div class="info-box text-start mt-3">
+          <p class="mb-0">
+            <i class="fas fa-info-circle"></i>
+            <strong> Recuerda:</strong> Puedes registrar a tus empleados, usando un gafete con un código de barras para colocar su contraseña.
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary w-100">Finalizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Reportar Anomalía -->
+<div class="modal fade" id="modalReportarAnomalia" tabindex="-1" aria-labelledby="modalReportarAnomaliaLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered custom-modal-dialog">
+    <div class="modal-content custom-modal-style">
+      <!-- Encabezado -->
+      <div class="modal-header">
+        <h5 class="fw-bold w-100 text-center text-primary" id="modalReportarAnomaliaLabel">
+          <i class="fas fa-triangle-exclamation"></i> Reportar anomalía
+        </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <!-- Cuerpo -->
+      <div class="modal-body">
+        <!-- Nota -->
+        <div class="alert alert-info d-flex align-items-start" style="border-radius:10px;">
+          <i class="fas fa-info-circle me-2 mt-1"></i>
+          <p class="mb-0">
+            <strong>Nota:</strong> Al realizar el reporte de una anomalía, el caso se sube al nivel de supervisor.
+          </p>
+        </div>
+        <!-- Tipo de problema -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Tipo de problema:</label>
+          <select class="form-control" id="tipoProblema">
+            <option selected disabled>Seleccione el tipo de problema</option>
+            <option>Problema 1</option>
+            <option>Problema 2</option>
+            <option>Problema 3</option>
+          </select>
+        </div>
+        <!-- Observaciones -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Observaciones:</label>
+          <div class="form-control" contenteditable="true" id="observaciones" style="min-height: 70px;"></div>
+        </div>
+      </div>
+      <!-- Footer con botón ancho -->
+      <div class="modal-footer p-0"><br>
+        <button type="button" class="btn btn-primary w-100" id="btnEscalar">
+          ESCALAR AL SUPERVISOR
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Modal Historial de Revisiones -->
+<div class="modal fade" id="modalHistorialRevisiones" tabindex="-1" aria-labelledby="historialRevisionesLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered custom-modal-dialog">
+    <div class="modal-content custom-modal-style">
+      <div class="modal-header">
+        <h5 class="fw-bold w-100 text-center text-primary" id="historialRevisionesLabel">
+          <i class="fas fa-history"></i> Historial de revisiones</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Campo Buscar -->
+        <div class="mb-3">
+          <label class="fw-bold">Buscar por:</label>
+          <select class="form-control" id="buscarPor">
+            <option>Seleccione el tipo de búsqueda</option>
+            <option>Fecha</option>
+            <option>Usuario</option>
+            <option>Resultado</option>
+          </select>
+        </div>
+        <!-- Valor elegido -->
+        <div class="mb-3">
+          <label class="fw-bold">[Valor elegido arriba]:</label>
+          <div class="form-control" contenteditable="true" id="valorBusqueda"></div>
+        </div>
+        <!-- Tabla de resultados -->
+        <div class="usuarios-section" style="border-radius: 10px 10px 0 0; background-color: #91268F;">
+          Resultados de la búsqueda
+        </div>
+        <div class="usuarios-list">
+          <table class="table mb-0">
+            <thead>
+              <tr style="background-color: #f8f9fa;">
+                <th>Fecha y hora de revisión</th>
+                <th>Folio de ticket</th>
+                <th>Usuario revisor</th>
+                <th>Resultado de revisión</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="4" class="text-center text-muted">No hay resultados</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Botón Exportar -->
+        <button class="btn btn-primary btn-block mt-3" id="btnExportar">EXPORTAR</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <!-- Bootstrap Bundle JS -->
+  <script src="bootstrap-5.1.3/js/bootstrap.bundle.min.js"></script>
+  <!-- jQuery -->
+  <script src="JQuery/jquery-3.7.1.min.js"></script>
+  <!-- Tu script personalizado -->
+  <script src="js/index.min.js"></script>
+  <script src="js/Index.js"></script>
+  <script src="js/sweetalert2.min.js"></script>
+</body>
+</html>
